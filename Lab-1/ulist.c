@@ -86,8 +86,7 @@ int notAnInplaceSort(struct list *l, struct list *outputList) {
 				(l->arr)[j+1] = temp;
 			}
 		}
-	}	
-	
+	}		
 }
 
 int print(struct list *l) {
