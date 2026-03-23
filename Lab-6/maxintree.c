@@ -36,14 +36,28 @@ void insert(node **root, int val) {
     }
 }
 
+int max(int a, int b) {
+    if(a > b) return a;
+    return b;
+}
+
+void maxNode(node *r, int *m) {
+    if(!r) return;
+    
+    *m = max(*m, r->val);
+    maxNode(r->left, m);
+    maxNode(r->right, m); 
+}
+
 int main() {
     node *r = NULL;
-    int arr[] = {10, 30, 50, 20, 60, 100};
+    int arr[] = {10, 30, 500, 20, 60, 100};
     for(int i = 0; i < 6; i++) {
         insert(&r, arr[i]);
     }
 
-    int t = 0, l = 0;
-    traverse(r, &t, &l);
-    printf("%d %d %d\n", t, l, t - l);
+    int m = 0;
+    maxNode(r, &m);
+
+    printf("%d\n", m);
 }

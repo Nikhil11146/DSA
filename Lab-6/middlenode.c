@@ -100,22 +100,6 @@ void print_list(struct Node *h) {
     printf("\n");
 } 
 
-struct Node* deleteDuplicates(struct Node* head) {
-    struct Node *pre=NULL, *curr=head;
-    while(curr && curr->next) {
-        if(curr->data == curr->next->data) {
-            if(!pre) head = curr->next;
-            else pre->next = curr->next;
-            pre=0, curr=head;
-        } else {
-            pre=curr;
-            curr=curr->next;
-        }
-    }
-    return head;
-    
-}
-
 int main() {
     struct Node *head = (struct Node * )malloc(sizeof(struct Node));
     head->data = 10;
@@ -124,8 +108,22 @@ int main() {
     for(int i = 1; i < 5; i++) {
         insert(&head, i*10);
     }
+    insert(&head, 0);
+    insert(&head, 0);
+    insert(&head, 0);
+    insert(&head, 0);
+    insert(&head, 0);
+    
+    struct Node *slow = head;
+    struct Node *fast = head;
+    while(fast && fast->next && fast->next && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
 
     print_list(head);
-    head = deleteDuplicates(head);
-    print_list(head);
+    
+    printf("%d\n", slow->data);
 }
+
